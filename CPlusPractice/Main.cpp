@@ -143,6 +143,13 @@ void gorillazReference() {
 		cout << ++monkeyJungle << endl;
 	} while (monkeyJungle < 2019);
 }
+void helloFunctions() {
+	cout << "Hello Functions\nPlease enter a number.";
+	int a, b;
+	cin >> a;
+	cout << a << "squared is " << a * a;
+}
+
 int main()
 {
 	cout << 5 << 0 <<5<<endl << "Test\n";
@@ -151,7 +158,7 @@ int main()
 	{
 		cout << "Please select an exercise:\n[1] Age Gate\n[2] Fahrenheit/Celcius Converter\n";
 		cout << "[3] Area of a Rectangle\n[4] Average of 5\n[5] 1-100\n[6] 100-1\n[7] Smallest of an Array\n";
-		cout << "[8] Even or Odd\n[9] Leap Year\n[10] 1995 - 2019\n";
+		cout << "[8] Even or Odd\n[9] Leap Year\n[10] 1995 - 2019\n[11] Hello Functions\n";
 
 		int choice = -1;
 		cin >> choice;
@@ -193,6 +200,10 @@ int main()
 		else if (choice == 10)
 		{
 			gorillazReference();
+		}
+		else if (choice == 11)
+		{
+			helloFunctions();
 		}
 		//age = -1;
 		//cout << "Wow, you're old fam at age of " << age << endl;
