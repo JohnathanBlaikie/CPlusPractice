@@ -7,6 +7,8 @@ using std::endl;
 
 struct person {
 	bool isAlive = true;
+	char name[64] = "temp";
+	char allegence[64] = "temp";
 	int age;
 	float cash;
 	int killcount;
@@ -121,10 +123,15 @@ int main()
 	}
 	else if (choiceInt == 3) {
 		countries* factions = new countries[4];
+		person* agents = new person[8];
 		factions[0] = { "USA", 4.0f, 100 };
 		factions[1] = { "RF", 5.0f, 10 };
 		factions[2] = { "EU", 3.0f, 100 };
 		factions[3] = { "CN", 4.5f, 1000 };
+
+		agents[0] = { true, "Jack Marston", factions[0].name, 35, 12000, 15 };
+		
+
 
 		bool gameLoop = true;
 		while (gameLoop) {
