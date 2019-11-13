@@ -6,10 +6,12 @@ using std::endl;
 
 
 struct person {
+	bool isAlive = true;
 	int age;
 	float cash;
 	int killcount;
 };
+
 
 float getMoney(person* target, float withdraw) {
 	float loss = (*target).cash < withdraw ? (*target).cash : withdraw;
@@ -19,10 +21,15 @@ float getMoney(person* target, float withdraw) {
 	return loss;
 
 }
-
 void erasePerson(person** target) {
 	(*target) = nullptr;
 }
+
+struct countries {
+	char name[64] = "Temp";
+	float stability = 0.0f;
+	int GDP = 0;
+};
 
 int sum(int* numbers, size_t length)
 {
@@ -52,10 +59,10 @@ void printFloats(float* arr, int size) {
 
 int main() 
 {
-	cout << "Please select an exercise\n[1] Intro\nThe Mugging of Jon\n";
+	cout << "Please select an exercise\n[1] Intro\n[2] The Mugging of Jon\n[3] Redstring\n";
 	int choiceInt = 0;
 	cin >> choiceInt;
-	if (choiceInt = 1) {
+	if (choiceInt == 1) {
 		int tenants = 10;
 		int* landLord = new int;
 		int* properties = new int[tenants];
@@ -100,12 +107,56 @@ int main()
 			std::cout << "Something was null!" << std::endl;
 		}
 	}
-	else if (choiceInt = 2) {
-		person jon;
-		jon.age = 25;
-		jon.cash = 40.68;
-		jon.killcount = 10;
+	else if (choiceInt == 2) {
+		person* jon = new person;
+		float bounty = 0.0f;
+		(*jon).age = 25;
+		(*jon).cash = 40.68;
+		(*jon).killcount = 10;
+		cout << "Age: " << (*jon).age << ", Cash: " << (*jon).cash << ", Killcount: " << (*jon).killcount << "\nEnter the amount you want to steal: ";
+		cin >> bounty;
+		getMoney(jon, bounty);
+		cout << "New Balance: " << (*jon).cash;
+		while (true);
 	}
+	else if (choiceInt == 3) {
+		countries* factions = new countries[4];
+		factions[0] = { "USA", 4.0f, 100 };
+		factions[1] = { "RF", 5.0f, 10 };
+		factions[2] = { "EU", 3.0f, 100 };
+		factions[3] = { "CN", 4.5f, 1000 };
 
+		bool gameLoop = true;
+		while (gameLoop) {
+			int choice = -1;
+			cout << "Faction Name:\t";
+			for (int i = 0; i < 4; i++) {
+				cout << factions[i].name << "\t";
+			}
+			cout << endl;
+			cout << "Stability:\t";
+			for (int i = 0; i < 4; i++) {
+				cout << factions[i].stability << "\t";
+			}
+			cout << endl;
+			cout << "Funds:\t\t";
+			for (int i = 0; i < 4; i++) {
+				cout << "$" << factions[i].GDP << "B\t";
+			}
+			cout << endl;
+
+			cin >> choice;
+
+		}
+		person* jon = new person;
+		float bounty = 0.0f;
+		(*jon).age = 25;
+		(*jon).cash = 40.68;
+		(*jon).killcount = 10;
+		cout << "Age: " << (*jon).age << ", Cash: " << (*jon).cash << ", Killcount: " << (*jon).killcount << "\nEnter the amount you want to steal: ";
+		cin >> bounty;
+		getMoney(jon, bounty);
+		cout << "New Balance: " << (*jon).cash;
+	}
 	return 0;
 }
