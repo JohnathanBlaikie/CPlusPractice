@@ -7,7 +7,8 @@ using std::endl;
 
 struct person {
 	bool isAlive = true;
-	char name[64] = "temp";
+	char firstName[64] = "temp";
+	char lastName[64] = "temp";
 	char allegence[64] = "temp";
 	int age;
 	float cash;
@@ -129,7 +130,14 @@ int main()
 		factions[2] = { "EU", 3.0f, 100 };
 		factions[3] = { "CN", 4.5f, 1000 };
 
-		agents[0] = { true, "Jack Marston", factions[0].name, 35, 12000, 15 };
+		agents[0] = { true, "Jack","Marston", "USA", 35, 12000, 15 };
+		agents[1] = { true, "Jim", "Milton", "USA", 48, 12000, 60 };
+		agents[2] = { true, "Jardani", "Jovonovich", "RF", 37, 12000, 15 };
+		agents[3] = { true, "Alexander", "Degtyarev", "RF", 35, 12000, 15 };
+		agents[4] = { true, "Jacques", "Baguise", "EU", 35, 12000, 15 };
+		agents[5] = { true, "Antonio", "Buccarati", "EU", 35, 12000, 15 };
+		agents[6] = { true, "Xiaowong", "Zheng", "CN", 35, 12000, 15 };
+		agents[7] = { true, "Dai", "Yun", "CN", 35, 12000, 15 };
 		
 
 
@@ -149,6 +157,55 @@ int main()
 			cout << "Funds:\t\t";
 			for (int i = 0; i < 4; i++) {
 				cout << "$" << factions[i].GDP << "B\t";
+			}
+			cout << endl << endl;
+			cout << "ACTIVE AGENTS:\t";
+			for (int i = 0; i < 8; i++) {
+				if (agents[i].isAlive == true && strlen(agents[i].lastName) > 5) {
+					cout << agents[i].lastName << ", \t";
+				}
+				else if (agents[i].isAlive == true && strlen(agents[i].lastName) <= 5) {
+					cout << agents[i].lastName << ", \t\t";
+				}
+			}
+			cout << endl;
+			cout << "\t\t";
+			for (int i = 0; i < 8; i++) {
+				if (agents[i].isAlive == true && strlen(agents[i].firstName) > 5) {
+					cout << agents[i].firstName << " \t";
+				}
+				else if (agents[i].isAlive == true && strlen(agents[i].firstName) <= 5) {
+					cout << agents[i].firstName << " \t\t";
+				}
+
+			}
+			cout << endl;
+			cout << "ALLEGENCE: \t";
+			for (int i = 0; i < 8; i++) {
+				if (agents[i].isAlive == true) {
+					cout << agents[i].allegence << " \t\t";
+				}
+			}
+			cout << endl;
+			cout << "AGE: \t\t";
+			for (int i = 0; i < 8; i++) {
+				if (agents[i].isAlive == true) {
+					cout << agents[i].age << " \t\t";
+				}
+			}
+			cout << endl;
+			cout << "PRICE: \t\t";
+			for (int i = 0; i < 8; i++) {
+				if (agents[i].isAlive == true) {
+					cout << agents[i].cash << " \t\t";
+				}
+			}
+			cout << endl;
+			cout << "KILLCOUNT: \t";
+			for (int i = 0; i < 8; i++) {
+				if (agents[i].isAlive == true) {
+					cout << agents[i].killcount << " \t\t";
+				}
 			}
 			cout << endl;
 
