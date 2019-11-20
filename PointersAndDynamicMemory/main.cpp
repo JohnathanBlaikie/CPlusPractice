@@ -13,13 +13,11 @@ struct person {
 	bool isAlive = true;
 	char firstName[64] = "temp";
 	char lastName[64] = "temp";
-	char allegence[64] = "temp";
+	char allegence[8] = "tmp";
 	int age;
 	float cash;
 	int killcount;
 };
-
-
 float getMoney(person* target, float withdraw) {
 	float loss = (*target).cash < withdraw ? (*target).cash : withdraw;
 
@@ -33,7 +31,8 @@ void erasePerson(person** target) {
 }
 
 struct countries {
-	char name[64] = "Temp";
+	int cID = 0;
+	char name[8] = "tmp";
 	char* allies = new char[16];
 	float stability = 0.0f;
 	int GDP = 0;
@@ -65,6 +64,16 @@ void printFloats(float* arr, int size) {
 	cout << *arr;
 }
 
+bool mission(float agentAge, float agentKillCount, int difficulty, int bounty) {
+	float proficiency = (agentKillCount + agentAge) / 10;
+	//cout << proficiency << "\n\n";
+	if (proficiency >= difficulty){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 int main() 
 {
 	cout << "Please select an exercise\n[1] Intro\n[2] The Mugging of Jon\n[3] Redstring\n";
@@ -130,10 +139,10 @@ int main()
 	else if (choiceInt == 3) {
 		countries* factions = new countries[4];
 		person* agents = new person[8];
-		factions[0] = { "USA", factions[2].name, 4.0f, 100 };
-		factions[1] = { "RF", factions[3].name, 5.0f, 10 };
-		factions[2] = { "EU", factions[0].name, 3.0f, 100 };
-		factions[3] = { "CN", factions[1].name, 4.5f, 1000 };
+		factions[0] = { 0, "USA", factions[2].name, 4.0f, 100 };
+		factions[1] = { 1, "RF", factions[3].name, 5.0f, 10 };
+		factions[2] = { 2, "EU", factions[0].name, 3.0f, 100 };
+		factions[3] = { 3, "CN", factions[1].name, 4.5f, 1000 };
 
 		agents[0] = { true, "Jack","Marston", "USA", 35, 2000, 5 };
 		agents[1] = { true, "Jim", "Milton", "USA", 48, 12000, 60 };
@@ -229,14 +238,76 @@ int main()
 				}
 			}
 			cout << "Choose a task for agent " << agents[choice].firstName << " " << agents[choice].lastName << ".\n";
-			cout << "[1] Disrupt a country's finances\n[2] Disrupt an alliance\n";
-			cout << "[3] Assassinate another agent\n[4] Skip turn\n";
-			cin >> choice;
-			switch (choice)
+			cout << "[1] Send on a Mission\n";
+			cout << "[2] Choose another agent \n[3] Skip turn\n";
+			int taskChoice = 0;
+			cin >> taskChoice;
+			switch (taskChoice)
 			{
-			case 1:
+				case 1:
+				{
+					cout << "Choose a mission:\n[1] Steal from a nation's finances \n[2] Disrupt an alliance\n";
+					cout << "[3] Assassinate an Agent\n";
+					cin >> taskChoice;
+					switch (taskChoice) {
+						case 1:
+						{
+							int tempExclusion = 0;
+							cout << "Choose a nation to target:\n";
+							for (int i = 0; i < 4; i++) {
+								if (strcmp(factions[i].name, agents[choice].allegence) != 0)
+								{
+									cout << "[" << factions[i].cID + 1 << "] " << factions[i].name << endl;
+								}
+								else {
+									tempExclusion = i;
+								}
 
-			default:
+							}
+							cin >> taskChoice;
+							taskChoice--;
+							while ((taskChoice < 0 || taskChoice > 4) || taskChoice == tempExclusion) {
+								if (taskChoice == tempExclusion)
+								{
+									cout << "Agent " << agents[choice].lastName << " refuses to attack his own faction.\n\nPlease choose a different faction.\n\n";
+
+								}
+								else {
+									cout << "Please choose a valid faction.\n\n";
+								}
+								cin >> taskChoice;
+								taskChoice--;
+							}
+							if (mission(agents[choice].age, agents[choice].killcount, 3, 50) == true) {
+								cout << "Agent " << agents[choice].firstName << " " << agents[choice].lastName;
+								cout << " has completed his objective.\n\n";
+								factions[taskChoice].GDP -= 50;
+								factions[tempExclusion].GDP += 50;
+							}
+							else {
+								cout << "Agent " << agents[choice].firstName << " " << agents[choice].lastName;
+								cout << " has failed his objective.\n\n";
+								factions[tempExclusion].GDP -= agents[choice].cash;
+							}
+
+						}
+						break; 
+						case 2:
+						{
+							cout << "\n\n||||||||||||||||test 2||||||||||||||||\n\n";
+						}
+						break;
+
+					}
+				}
+				break;
+				case 2:
+				{
+					cout << "Swaos";
+				}
+				break;
+			
+				default:
 				break;
 			}
 

@@ -6,7 +6,7 @@ public:
 
 	Missions();
 	Missions(int bounty, int difficulty);
-
+	Missions(int agentLevel, int agentKillCount, int bounty, int difficulty);
 	~Missions();
 };
 
